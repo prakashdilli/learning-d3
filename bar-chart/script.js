@@ -23,9 +23,23 @@ const render = data => {
     const g = svg.append('g')
                 .attr('transform',`translate(${margin.left},${margin.top})`)
 
-    g.append('g').call(d3.axisLeft(yScale))
-    g.append('g').call(d3.axisBottom(xScale))
-                    .attr('transform',`translate(0,${innerHeight})`)
+    const xAxisTickFormat = number =>
+         d3.format('.3s')(number)
+         .replace('G','B')
+
+    const xAxis = d3.axisBottom(xScale).tickFormat(xAxisTickFormat)
+
+    g.append('g')
+        .call(d3.axisLeft(yScale))
+        .selectAll('.domain, .tick line')
+            .remove()
+
+    g.append('g')
+        .call(xAxis)
+        .attr('transform',`translate(0,${innerHeight})`)
+        .selectAll('.domain')
+            .remove()
+
     g.selectAll('rect').data(data)
         .enter().append('rect')
             .attr('y',d => yScale(yValue(d)))
