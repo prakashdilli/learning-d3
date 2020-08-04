@@ -8,7 +8,7 @@ const render = data => {
 
     const xValue = d => d.population
     const yValue = d => d.country
-    const margin = {top:20,right:20,bottom:20,left:70}
+    const margin = {top:20,right:20,bottom:50,left:70}
     const innerWidth = width-margin.right-margin.left
     const innerHeight = height-margin.top-margin.bottom
     const xScale = d3.scaleLinear()
@@ -27,18 +27,31 @@ const render = data => {
          d3.format('.3s')(number)
          .replace('G','B')
 
-    const xAxis = d3.axisBottom(xScale).tickFormat(xAxisTickFormat)
+    const xAxis = d3.axisBottom(xScale)
+        .tickFormat(xAxisTickFormat)
+        .tickSize(-innerHeight)
 
     g.append('g')
         .call(d3.axisLeft(yScale))
         .selectAll('.domain, .tick line')
             .remove()
 
-    g.append('g')
+    const xAxisG = g.append('g')
         .call(xAxis)
         .attr('transform',`translate(0,${innerHeight})`)
+
+    xAxisG
         .selectAll('.domain')
             .remove()
+    
+    xAxisG.append('text')
+            .attr('fill','black')
+            .text('Population')
+            .attr('x',innerWidth/2)
+            .attr('y',40)
+
+    g.append('text')
+        .text('10 Most Populous Country')
 
     g.selectAll('rect').data(data)
         .enter().append('rect')
