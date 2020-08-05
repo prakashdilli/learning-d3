@@ -4,7 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Bar Chart | Top 10 World Population</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
+        rect{
+            fill: steelblue;
+        }
+        .title{
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            word-spacing: 4px;
+            text-anchor: middle;
+        }
+        .xAxisLabel{
+            font-size: 14px;
+        }
+        .xAxisTitle{
+            font-size: 14px;
+        }
+        .yAxisLabel .tick line{
+            stroke: #ccc;
+        }
+        .yAxisLabel text{
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .xAxisLabel text{
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <svg width="960" height="500"></svg>

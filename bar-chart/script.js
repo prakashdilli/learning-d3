@@ -8,7 +8,7 @@ const render = data => {
 
     const xValue = d => d.population
     const yValue = d => d.country
-    const margin = {top:20,right:20,bottom:50,left:70}
+    const margin = {top:50,right:20,bottom:50,left:80}
     const innerWidth = width-margin.right-margin.left
     const innerHeight = height-margin.top-margin.bottom
     const xScale = d3.scaleLinear()
@@ -30,14 +30,18 @@ const render = data => {
     const xAxis = d3.axisBottom(xScale)
         .tickFormat(xAxisTickFormat)
         .tickSize(-innerHeight)
+    
+    const yAxis = d3.axisLeft(yScale)
 
     g.append('g')
-        .call(d3.axisLeft(yScale))
+        .call(yAxis)
+        .attr('class','yAxisLabel')
         .selectAll('.domain, .tick line')
             .remove()
 
     const xAxisG = g.append('g')
         .call(xAxis)
+        .attr('class','yAxisLabel')
         .attr('transform',`translate(0,${innerHeight})`)
 
     xAxisG
@@ -47,10 +51,14 @@ const render = data => {
     xAxisG.append('text')
             .attr('fill','black')
             .text('Population')
+            .attr('class','xAxisTitle')
             .attr('x',innerWidth/2)
             .attr('y',40)
 
     g.append('text')
+        .attr('class','title')
+        .attr('x',innerWidth/2)
+        .attr('y',-20)
         .text('10 Most Populous Country')
 
     g.selectAll('rect').data(data)
